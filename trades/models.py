@@ -6,8 +6,14 @@ class Trader(models.Model):
     last_name = models.CharField(max_length=30)
     email = models.EmailField(unique=True)
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 class Bank(models.Model):
     bank_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.bank_name}"
 
 class Trade(models.Model):
     TRADE_NAME = (
@@ -40,3 +46,6 @@ class Trade(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
     trader = models.ForeignKey(Trader, on_delete=models.SET_NULL, null=True)
     bank = models.ForeignKey(Bank, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return f"{self.trade_name}"
