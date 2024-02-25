@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="max-w-lg mx-auto">
+        <a class="text-purple-800 font-bold" href="{% url 'trades:trade-list' %}">← Go back to trades</a>
+        <div class="border-t border-gray-200">
+        </div>
+            <form method="post" class="mt-5 bg-purple-100 p-4 rounded-lg shadow-md">
+                <div>Are you sure you want to delete '{{ trade.bank }} - {{ trade.trade_name }}'?</div>
+                <br/>
+                {% csrf_token %}
+                <div class="grid grid-cols-1 gap-4">
+                    {{ form.as_p }}
+                </div>
+                <div class="flex justify-left">
+                    <button type="submit" class="py-2 whitespace-nowrap text-right font-medium text-white hover:bg-red-800 bg-red-500 px-1 py-1 rounded-md mr-2">
+                        Delete
+                    </button>
+                    <a href="{% url 'trades:trade-detail' trade.pk %}" class=" py-2 whitespace-nowrap text-right font-medium text-white hover:bg-green-800 bg-green-500 px-1 py-1 rounded-md mr-2">
+                        ← Go back
+                    </a>
+                </div>
+            </form>
+    </div>
+</body>
+</html>

@@ -12,9 +12,9 @@
     <div class="container px-5 py-24 mx-auto flex flex-wrap">
         <div class="w-full mb-6 py-6 flex justify-between items-center border-b border-gray-200">
             <h1 class="text-gray-800 font-bold text-xl">NatWest Markets Trades</h1>
-                    <div class="text-white hover:bg-purple-800 bg-purple-500 px-2 py-2 rounded-md">
+                    <a class="text-white hover:bg-purple-800 bg-purple-500 px-2 py-2 rounded-md" href="{% url 'trades:trade-create' %}">
                         + Create a new trade
-                    </div>
+                    </a>
         </div>
 
         <div class="flex flex-col w-full">
@@ -67,7 +67,7 @@
                                     {{ trade.id }}
                                 </td>
                                 <td>
-                                    <a class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" href="/trades/{{ trade.pk }}">
+                                    <a class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" href="/trades/trade-detail/{{ trade.pk }}/">
                                         {{ trade.trade_name }}
                                     </a>
                                 </td>
@@ -95,14 +95,14 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="text-white hover:bg-green-800 bg-green-500 px-1 py-1 rounded-md">
+                                    <a href="{% url 'trades:trade-update' trade.pk %}" class="text-white hover:bg-green-800 bg-green-500 px-1 py-1 rounded-md">
                                         Edit
-                                    </div>
+                                    </a>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="text-white hover:bg-red-800 bg-red-500 px-1 py-1 rounded-md">
+                                    <a href="{% url 'trades:trade-delete' trade.pk %}" class="text-white hover:bg-red-800 bg-red-500 px-1 py-1 rounded-md">
                                         Delete
-                                    </div>
+                                    </a>
                                 </td>
                             </tr>
                         {% empty %}

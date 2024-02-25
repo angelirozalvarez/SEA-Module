@@ -11,7 +11,7 @@
     <div class="max-w-lg mx-auto">
     <a class="text-purple-800 font-bold" href="{% url 'trades:trade-list' %}">← Go back to trades</a>
     <div class="py-1 border-t border-gray-200">
-        <h1 class="text-3xl text-gray-800">Trade {{trade.id}} Details</h1>
+        <h1 class="text-3xl text-gray-800">'{{ trade.bank }} - {{ trade.trade_name }}' details</h1>
         <div class="mt-5 bg-purple-100 p-4 rounded-lg shadow-md">
             <div class="grid grid-cols-1 gap-4">Trade name: {{trade.trade_name}}</div>
             <div class="grid grid-cols-1 gap-4">Status: {{trade.status}}</div>
@@ -22,8 +22,8 @@
             <div class="grid grid-cols-1 gap-4">Trader: {{ trade.trader }}</div>
             <div class="grid grid-cols-1 gap-4">Bank: {{ trade.bank }}</div>
             <br/>
-            <a class="w-full text-white bg-green-500 hover:bg-green-800 px-4 py-2 rounded-md">EDIT</a>
-            <a class="w-full text-white bg-red-500 hover:bg-red-800 px-4 py-2 rounded-md">DELETE</a>
+            <a href="{% url 'trades:trade-update' trade.pk %}" class="w-full text-white bg-green-500 hover:bg-green-800 px-4 py-2 rounded-md">EDIT</a>
+            <a href="{% url 'trades:trade-delete' trade.pk %}" class="w-full text-white bg-red-500 hover:bg-red-800 px-4 py-2 rounded-md">DELETE</a>
         </div>
     </div>
 </div>
