@@ -1,15 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
+
 <section class="text-gray-700 body-font">
-    <div class="container px-5 py-24 mx-auto flex flex-wrap">
+    <div class="container px-5 py-7 mx-auto flex flex-wrap">
         <div class="w-full mb-6 py-6 flex justify-between items-center border-b border-gray-200">
             <h1 class="text-gray-800 font-bold text-xl">NatWest Markets Trades</h1>
                     <a class="text-white hover:bg-purple-800 bg-purple-500 px-2 py-2 rounded-md" href="{% url 'trades:trade-create' %}">
@@ -24,19 +18,19 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" class="px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Trade ID
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Trade Name
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Status
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Comments
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" class="px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Quantity
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -48,10 +42,10 @@
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Trader
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Bank
                             </th>
-                            <th scope="col" class="relative px-6 py-3">
+                            <th scope="col" class="relative px-3 py-3">
                             <span class="sr-only">Edit</span>
                             </th>
                             <th scope="col" class="relative px-6 py-3">
@@ -63,21 +57,21 @@
                     <tbody>
                         {% for trade in trades %}
                             <tr class="bg-white">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <td class="px-1 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ trade.id }}
                                 </td>
                                 <td>
-                                    <a class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" href="/trades/trade-detail/{{ trade.pk }}/">
+                                    <a class="px-6 py-4 whitespace-nowrap text-sm font-medium font-bold text-purple-500 hover:text-purple-800" href="/trades/trade-detail/{{ trade.pk }}/">
                                         {{ trade.trade_name }}
                                     </a>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <td class="px-2 py-3 whitespace-nowrap text-sm text-gray-500">
                                     {{ trade.status }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <td class="px-4 py-3 text-sm whitespace-nowrap text-gray-500 tracking-wider max-w-xs truncate">
                                     {{ trade.status_comments }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <td class="px-1 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ trade.quantity }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -89,7 +83,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ trade.trader }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ trade.bank }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -121,10 +115,7 @@
     </div>
 </section>
 
-</body>
-</html>
-
-
+{% endblock content %}
 
 
 

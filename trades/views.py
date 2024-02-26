@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Trade
-from .forms import TradeForm
+from .forms import TradeModelForm
 
 def trade_list(request):
     trades = Trade.objects.all()
@@ -17,9 +17,9 @@ def trade_detail(request, pk):
     return render(request, 'trades/trade_detail.html', context)
 
 def trade_create(request):
-    form = TradeForm()
+    form = TradeModelForm()
     if request.method == 'POST':
-        form = TradeForm(request.POST)
+        form = TradeModelForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/trades/trade-list/')
@@ -30,9 +30,9 @@ def trade_create(request):
 
 def trade_update(request, pk):
     trade = Trade.objects.get(id=pk)
-    form = TradeForm(instance=trade)
+    form = TradeModelForm(instance=trade)
     if request.method == 'POST':
-        form = TradeForm(request.POST, instance=trade)
+        form = TradeModelForm(request.POST, instance=trade)
         if form.is_valid():
             form.save()
             return redirect('/trades/trade-list/')
