@@ -6,10 +6,10 @@
       <span class="ml-3 text-xl">TM System</span>
     </a>
     {% else %}
-    <div class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+    <a href="{% url 'landing-page' %}" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
       <img src="https://cdn.worldvectorlogo.com/logos/natwest-2.svg" class="h-12 w-12">
       <span class="ml-3 text-xl">TM System</span>
-    </div>
+    </a>
     {% endif %}
 
     {% if request.user.is_authenticated %}
