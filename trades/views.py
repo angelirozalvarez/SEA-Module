@@ -2,13 +2,14 @@ from django.shortcuts import render, redirect, reverse
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Trade
 from .forms import TradeModelForm, CustomUserCreationForm
-from .decorators import unauthenticated_user
+from .decorators import unauthenticated_user, allowed_users
 
+User = get_user_model()
 
 @unauthenticated_user
 def adminSignup(request):
@@ -17,12 +18,12 @@ def adminSignup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
+            user.is_staff = True  # Set user as staff
+            user.is_superuser = True  # Set user as superuser
+            user.save()
 
-            group = Group.objects.get(name='Admin')
-            user.groups.add(group)
-
-            messages.success(request, 'Admin account successfully created. Please login.')
+            messages.success(request, 'Superuser account successfully created. Please login.')
             return redirect('login')
 
     context = {'form': form}
@@ -116,14 +117,3 @@ class TradeDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('trades:trade-list')
-
-
-
-
-
-
-
-
-
-
-

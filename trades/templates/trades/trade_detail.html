@@ -17,7 +17,9 @@
             <div class="grid grid-cols-1 gap-4">Bank: {{ trade.bank }}</div>
             <br/>
             <a href="{% url 'trades:trade-update' trade.pk %}" class="w-full text-white bg-green-500 hover:bg-green-800 px-4 py-2 rounded-md">EDIT</a>
+            {% if request.user.is_staff %}
             <a href="{% url 'trades:trade-delete' trade.pk %}" class="w-full text-white bg-red-500 hover:bg-red-800 px-4 py-2 rounded-md">DELETE</a>
+            {% endif %}
         </div>
     </div>
 </div>
