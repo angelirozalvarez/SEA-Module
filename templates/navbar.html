@@ -14,9 +14,9 @@
 
     {% if request.user.is_authenticated %}
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-      <a href="{% url 'trades:trade-list' %}" class="font-bold text-purple-500 hover:text-purple-800 mr-6">Trades</a>
-      <a class="font-bold text-purple-500 hover:text-purple-800 mr-6">Traders</a>
-      <a class="font-bold text-purple-500 hover:text-purple-800 mr-6">Banks</a>
+      <a href="{% url 'trades:trade-list' %}" class="font-bold text-purple-500 hover:text-purple-800 mr-6 underline">Trades</a>
+      <a class="font-bold text-purple-500 hover:text-purple-800 mr-6 underline">Traders</a>
+      <a class="font-bold text-purple-500 hover:text-purple-800 mr-6 underline">Banks</a>
     </nav>
     <span>Hello, {{request.user}} </span>
     <a href="{% url 'logout' %}" class="border-2 border-gray-500/50 ml-6 inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">

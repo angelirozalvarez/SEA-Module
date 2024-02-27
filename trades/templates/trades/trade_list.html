@@ -21,31 +21,30 @@
                             <th scope="col" class=" px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Trade ID
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Trade Name
                             </th>
                             <th scope="col" class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Status
                             </th>
-                            <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Comments
                             </th>
                             <th scope="col" class="px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Quantity
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Price
+                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Price (GBP)
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Submitted
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Trader
                             </th>
-                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-2">
                             Bank
                             </th>
-                            <th scope="col" class="relative px-3 py-3">
                             <span class="sr-only">Edit</span>
                             </th>
                             <th scope="col" class="relative px-6 py-3">
@@ -61,45 +60,44 @@
                                     {{ trade.id }}
                                 </td>
                                 <td>
-                                    <a class="px-6 py-4 whitespace-nowrap text-sm font-medium font-bold text-purple-500 hover:text-purple-800" href="/trades/trade-detail/{{ trade.pk }}/">
+                                    <a class="px-3 py-4 whitespace-nowrap text-sm font-medium font-bold text-purple-500 hover:text-purple-800" href="/trades/trade-detail/{{ trade.pk }}/">
                                         {{ trade.trade_name }}
                                     </a>
                                 </td>
                                 <td class="px-2 py-3 whitespace-nowrap text-sm text-gray-500">
                                     {{ trade.status }}
                                 </td>
-                                <td class="px-4 py-3 text-sm whitespace-nowrap text-gray-500 tracking-wider max-w-xs truncate">
+                                <td class="px-2 py-3 text-sm whitespace-nowrap text-gray-500 tracking-wider max-w-xs truncate">
                                     {{ trade.status_comments }}
                                 </td>
                                 <td class="px-1 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ trade.quantity }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ trade.price }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ trade.datetime }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ trade.trader }}
                                 </td>
-                                <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <td class="px-2 py-3 text-sm whitespace-nowrap text-gray-500 tracking-wider max-w-xs truncate">
                                     {{ trade.bank }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href="{% url 'trades:trade-update' trade.pk %}" class="text-white hover:bg-green-800 bg-green-500 px-1 py-1 rounded-md">
                                         Edit
                                     </a>
                                 </td>
-
+                                {% if request.user.is_staff %}
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href="{% url 'trades:trade-delete' trade.pk %}" class="text-white hover:bg-red-800 bg-red-500 px-1 py-1 rounded-md">
                                         Delete
                                     </a>
                                 </td>
-
+                                {% endif %}
                             </tr>
                         {% empty %}
                             <tr>
