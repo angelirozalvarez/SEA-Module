@@ -3,6 +3,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Trade
 from .forms import TradeModelForm, CustomUserCreationForm
 
@@ -43,26 +44,26 @@ def logoutUser(request):
     return redirect('landing-page')
 
 
-class HomepageView(TemplateView):
+class HomepageView(LoginRequiredMixin, TemplateView):
     template_name = 'home_page.html'
 
 class LandingPageView(TemplateView):
     template_name = 'landing_page.html'
 
 
-class TradeListView(ListView):
+class TradeListView(LoginRequiredMixin, ListView):
     template_name = 'trades/trade_list.html'
     queryset = Trade.objects.all()
     context_object_name = 'trades'
 
 
-class TradeDetailView(DetailView):
+class TradeDetailView(LoginRequiredMixin, DetailView):
         template_name = 'trades/trade_detail.html'
         queryset = Trade.objects.all()
         context_object_name = 'trade'
 
 
-class TradeCreateView(CreateView):
+class TradeCreateView(LoginRequiredMixin, CreateView):
     template_name = 'trades/trade_create.html'
     form_class = TradeModelForm
 
@@ -70,7 +71,7 @@ class TradeCreateView(CreateView):
         return reverse('trades:trade-list')
 
 
-class TradeUpdateView(UpdateView):
+class TradeUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'trades/trade_update.html'
     queryset = Trade.objects.all()
     form_class = TradeModelForm
@@ -79,7 +80,7 @@ class TradeUpdateView(UpdateView):
         return reverse('trades:trade-list')
 
 
-class TradeDeleteView(DeleteView):
+class TradeDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'trades/trade_delete.html'
     queryset = Trade.objects.all()
 
