@@ -4,7 +4,11 @@
 
 <div class="max-w-lg mx-auto">
     <br/>
-    <a class="text-pink-500 font-bold" href="{% url 'signup' %}">Don't have an account? Signup.</a>
+    <div><a class="w-full text-white bg-purple-500 hover:bg-purple-800 px-2 py-2 rounded-md" href="{% url 'landing-page' %}">← Go back</a></div>
+    <br/>
+    <div>
+        <a href="{% url 'signup-option' %}" class="text-pink-500 font-bold">Don't have an account? Signup.</a>
+    </div>
     <div class="py-1 border-t border-gray-200">
         <h1 class="text-3xl text-gray-800">Enter login details</h1>
     </div>

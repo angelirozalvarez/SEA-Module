@@ -3,25 +3,50 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Trade
 from .forms import TradeModelForm, CustomUserCreationForm
+from .decorators import unauthenticated_user
 
 
-def signup(request):
+@unauthenticated_user
+def adminSignup(request):
     form = CustomUserCreationForm()
 
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Account successfully created. Please login.')
+            user = form.save()
+
+            group = Group.objects.get(name='Admin')
+            user.groups.add(group)
+
+            messages.success(request, 'Admin account successfully created. Please login.')
             return redirect('login')
 
     context = {'form': form}
-    return render(request, 'registration/signup.html', context)
+    return render(request, 'registration/admin_signup.html', context)
 
+@unauthenticated_user
+def regularUserSignup(request):
+    form = CustomUserCreationForm()
 
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+
+            group = Group.objects.get(name='Regular User')
+            user.groups.add(group)
+
+            messages.success(request, 'Regular user account successfully created. Please login.')
+            return redirect('login')
+
+    context = {'form': form}
+    return render(request, 'registration/regular_user_signup.html', context)
+
+@unauthenticated_user
 def loginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -47,9 +72,14 @@ def logoutUser(request):
 class HomepageView(LoginRequiredMixin, TemplateView):
     template_name = 'home_page.html'
 
-class LandingPageView(TemplateView):
-    template_name = 'landing_page.html'
+@unauthenticated_user
+def landingPage(request):
+    return render(request, 'landing_page.html')
 
+
+@unauthenticated_user
+def signupOptionPage(request):
+    return render(request, 'registration/signup_option.html')
 
 class TradeListView(LoginRequiredMixin, ListView):
     template_name = 'trades/trade_list.html'

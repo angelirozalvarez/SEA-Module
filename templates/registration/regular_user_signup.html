@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="max-w-lg mx-auto">
+    <br/>
+    <div><a class="w-full text-white bg-purple-500 hover:bg-purple-800 px-2 py-2 rounded-md" href="{% url 'landing-page' %}">← Go back</a></div>
+    <br/>
+    <div><a class="text-pink-500 font-bold" href="{% url 'login' %}">Have an account? Login instead.</a></div>
+    <div class="py-1 border-t border-gray-200">
+        <h1 class="text-3xl text-gray-800">Signup as regular user</h1>
+    </div>
+        <form method="post" class="mt-5 bg-purple-100 p-4 rounded-lg shadow-md">
+            {% csrf_token %}
+            <div class="grid grid-cols-1 gap-4">
+                {{ form.username.label }}
+                {{ form.username }}
+
+                {{ form.email.label }}
+                {{ form.email }}
+
+                {{ form.password1.label }}
+                {{ form.password1 }}
+
+                {{ form.password2.label }}
+                {{ form.password2 }}
+            </div>
+            <br/>
+
+            {{ form.errors }}
+
+            <button type="submit" class="w-full text-white bg-purple-500 hover:bg-purple-800 px-4 py-2 rounded-md">
+                Signup
+            </button>
+        </form>
+</div>
+
+{% endblock content %}
