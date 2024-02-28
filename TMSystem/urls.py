@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from trades.views import HomepageView, landingPage, signupOptionPage, adminSignup, loginPage, logoutUser, regularUserSignup, UnauthorisedMessageView
+from trades.views import HomepageView, landingPage, signupOptionPage, adminSignup, loginPage, logoutUser, regularUserSignup, UnauthorisedMessageView, LogoutConfirmView
 
 
 urlpatterns = [
@@ -16,6 +16,7 @@ urlpatterns = [
     path('admin-signup/', adminSignup, name='admin-signup'),
     path('user-signup/', regularUserSignup, name='regular-user-signup'),
     path('login/', loginPage, name='login'),
+    path('confirm-logout/', LogoutConfirmView.as_view(), name='confirm-logout'),
     path('logout/', logoutUser, name='logout')
 
 ]
