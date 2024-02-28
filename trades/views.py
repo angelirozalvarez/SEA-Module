@@ -3,11 +3,13 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Trade
 from .forms import TradeModelForm, CustomUserCreationForm
 from .decorators import unauthenticated_user, allowed_users
+
 
 User = get_user_model()
 
@@ -23,7 +25,10 @@ def adminSignup(request):
             user.is_superuser = True  # Set user as superuser
             user.save()
 
-            messages.success(request, 'Superuser account successfully created. Please login.')
+            admin_group, created = Group.objects.get_or_create(name='Admin')
+            user.groups.add(admin_group)
+
+            messages.success(request, 'Admin account successfully created. Please login.')
             return redirect('login')
 
     context = {'form': form}
@@ -59,19 +64,28 @@ def loginPage(request):
             login(request, user)
             return redirect('home-page')
         else:
-            messages.info(request, 'Username OR password is incorrect.')
+            messages.error(request, 'Username OR password is incorrect.')
 
     context = {}
     return render(request, 'registration/login.html', context)
 
 
+@login_required(login_url='login')
 def logoutUser(request):
     logout(request)
     return redirect('landing-page')
 
 
+class LogoutConfirmView(LoginRequiredMixin, TemplateView):
+    template_name = 'registration/confirm_logout.html'
+
+
 class HomepageView(LoginRequiredMixin, TemplateView):
     template_name = 'home_page.html'
+
+
+class UnauthorisedMessageView(LoginRequiredMixin, TemplateView):
+    template_name = 'unauthorised_message.html'
 
 @unauthenticated_user
 def landingPage(request):
@@ -101,6 +115,9 @@ class TradeCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse('trades:trade-list')
 
+    def form_valid(self, form):
+        messages.success(self.request, 'Trade successfully created.')
+        return super().form_valid(form)
 
 class TradeUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'trades/trade_update.html'
@@ -110,10 +127,21 @@ class TradeUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse('trades:trade-list')
 
+    def form_valid(self, form):
+        messages.success(self.request, 'Trade successfully updated.')
+        return super().form_valid(form)
 
-class TradeDeleteView(LoginRequiredMixin, DeleteView):
-    template_name = 'trades/trade_delete.html'
-    queryset = Trade.objects.all()
 
-    def get_success_url(self):
-        return reverse('trades:trade-list')
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin'])
+def deleteTrade(request, pk):
+    trade = Trade.objects.get(id=pk)
+    context = {
+        'trade': trade
+    }
+    if request.method == 'POST':
+        trade.delete()
+        messages.success(request, 'Trade successfully deleted.')
+        return redirect('trades:trade-list')
+
+    return render(request, "trades/trade_delete.html", context)
