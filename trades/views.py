@@ -3,11 +3,13 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Trade
 from .forms import TradeModelForm, CustomUserCreationForm
 from .decorators import unauthenticated_user, allowed_users
+
 
 User = get_user_model()
 
@@ -65,6 +67,7 @@ def loginPage(request):
     return render(request, 'registration/login.html', context)
 
 
+@login_required(login_url='login')
 def logoutUser(request):
     logout(request)
     return redirect('landing-page')
@@ -72,6 +75,10 @@ def logoutUser(request):
 
 class HomepageView(LoginRequiredMixin, TemplateView):
     template_name = 'home_page.html'
+
+
+class UnauthorisedMessageView(LoginRequiredMixin, TemplateView):
+    template_name = 'unauthorised_message.html'
 
 @unauthenticated_user
 def landingPage(request):
@@ -111,9 +118,21 @@ class TradeUpdateView(LoginRequiredMixin, UpdateView):
         return reverse('trades:trade-list')
 
 
-class TradeDeleteView(LoginRequiredMixin, DeleteView):
-    template_name = 'trades/trade_delete.html'
-    queryset = Trade.objects.all()
+# class TradeDeleteView(LoginRequiredMixin, DeleteView):
+#     template_name = 'trades/trade_delete.html'
+#     queryset = Trade.objects.all()
+#
+#     def get_success_url(self):
+#         return reverse('trades:trade-list')
 
-    def get_success_url(self):
-        return reverse('trades:trade-list')
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin'])
+def deleteTrade(request, pk):
+    trade = Trade.objects.get(id=pk)
+    context = {
+        'trade': trade
+    }
+    if request.method == 'POST':
+        trade.delete()
+        return redirect('trades:trade-list')
+    return render(request, "trades/trade_delete.html", context)
