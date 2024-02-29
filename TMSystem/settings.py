@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'crispy_tailwind',
 
     # Local apps
-    'trades'
+    'trades',
+    'traders'
 ]
 
 MIDDLEWARE = [

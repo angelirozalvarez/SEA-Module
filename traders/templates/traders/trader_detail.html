@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="max-w-lg mx-auto">
+    <a class="text-purple-800 font-bold" href="{% url 'traders:trader-list' %}">← Go back to traders</a>
+    <div class="py-1 border-t border-gray-200">
+        <h1 class="text-3xl text-gray-800">'{{ trader.first_name }} - {{ trader.last_name }}' details</h1>
+        <div class="mt-5 bg-purple-100 p-4 rounded-lg shadow-md">
+            <div>
+                <div class="flex items-center">
+                    <span class="font-bold mr-2">Trade name:</span>
+                    <span>{{ trader.first_name }}</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="font-bold mr-2">Status:</span>
+                    <span>{{ trader.last_name }}</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="font-bold mr-2">Comments:</span>
+                    <span>{{ trader.email }}</span>
+                </div>
+            </div>
+            <br/>
+            <a href="{% url 'traders:trader-update' trader.pk %}" class="w-full text-white bg-green-500 hover:bg-green-800 px-4 py-2 rounded-md">EDIT</a>
+            {% if request.user.is_staff %}
+            <a href="{% url 'traders:trader-delete' trader.pk %}" class="w-full text-white bg-red-500 hover:bg-red-800 px-4 py-2 rounded-md">DELETE</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

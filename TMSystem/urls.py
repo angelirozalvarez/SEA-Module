@@ -11,6 +11,7 @@ urlpatterns = [
     path('unauthorised-action/', UnauthorisedMessageView.as_view(), name='unauthorised-action'),
 
     path('trades/', include('trades.urls'), name='trades'),
+    path('traders/', include('traders.urls'), name='traders'),
 
     path('signup-as/', signupOptionPage, name='signup-option'),
     path('admin-signup/', adminSignup, name='admin-signup'),
