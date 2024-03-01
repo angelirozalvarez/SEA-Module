@@ -44,7 +44,8 @@ INSTALLED_APPS = [
 
     # Local apps
     'trades',
-    'traders'
+    'traders',
+    'banks'
 ]
 
 MIDDLEWARE = [
