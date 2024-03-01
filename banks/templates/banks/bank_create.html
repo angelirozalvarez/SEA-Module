@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load tailwind_filters %}
+
+{% block content %}
+
+<div class="max-w-lg mx-auto">
+    <a class="text-purple-800 font-bold" href="{% url 'banks:bank-list' %}">← Go back to banks</a>
+    <div class="py-1 border-t border-gray-200">
+        <h1 class="text-3xl text-gray-800">Create a new bank</h1>
+    </div>
+        <form method="post" class="mt-5 bg-purple-100 p-4 rounded-lg shadow-md">
+            {% csrf_token %}
+            <div class="grid grid-cols-1 gap-4">
+                {{ form|crispy }}
+            </div>
+            <br/>
+            <button type="submit" class="w-full text-white bg-purple-500 hover:bg-purple-800 px-4 py-2 rounded-md">
+                Submit
+            </button>
+        </form>
+</div>
+
+{% endblock content %}

@@ -20,9 +20,9 @@
 
     <div class="container px-5 py-3 mx-auto flex flex-wrap">
         <div class="w-full mb-6 py-3 flex justify-between items-center border-b border-gray-200">
-            <h1 class="text-gray-800 font-bold text-xl">Traders</h1>
-            <a href="{% url 'traders:trader-create' %}" class="text-white hover:bg-purple-800 bg-purple-500 px-2 py-2 rounded-md">
-                + Add a new trader
+            <h1 class="text-gray-800 font-bold text-xl">Banks</h1>
+            <a href="{% url 'banks:bank-create' %}" class="text-white hover:bg-purple-800 bg-purple-500 px-2 py-2 rounded-md">
+                + Add a new bank
             </a>
         </div>
 
@@ -34,50 +34,31 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class=" px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Trader ID
+                            Bank ID
                             </th>
                             <th scope="col" class=" px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            First Name
-                            </th>
-                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Last Name
-                            </th>
-                            <th scope="col" class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Email
-                            </th>
-                            <span class="sr-only">Edit</span>
-                            </th>
-                            <th scope="col" class="relative px-6 py-3">
-                            <span class="sr-only">Delete</span>
+                            Bank Name
                             </th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        {% for trader in traders %}
+                        {% for bank in banks %}
                             <tr class="bg-white">
                                 <td class="px-1 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    {{ trader.id }}
-                                </td>
-                                <td>
-                                    <a href="/traders/trader-detail/{{ trader.pk }}/" class="px-3 py-4 whitespace-nowrap text-sm font-medium font-bold text-purple-500 hover:text-purple-800">
-                                        {{ trader.first_name }}
-                                    </a>
+                                    {{ bank.id }}
                                 </td>
                                 <td class="px-2 py-3 whitespace-nowrap text-sm text-gray-500">
-                                    {{ trader.last_name }}
-                                </td>
-                                <td class="px-2 py-3 text-sm whitespace-nowrap text-gray-500 tracking-wider max-w-xs truncate">
-                                    {{ trader.email }}
+                                    {{ bank.bank_name }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="{% url 'traders:trader-update' trader.pk %}" class="text-white hover:bg-green-800 bg-green-500 px-1 py-1 rounded-md">
+                                    <a href="{% url 'banks:bank-update' bank.pk %}" class="text-white hover:bg-green-800 bg-green-500 px-1 py-1 rounded-md">
                                         Edit
                                     </a>
                                 </td>
                                 {% if request.user.is_staff %}
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="{% url 'traders:trader-delete' trader.pk %}" class="text-white hover:bg-red-800 bg-red-500 px-1 py-1 rounded-md">
+                                    <a href="{% url 'banks:bank-delete' bank.pk %}" class="text-white hover:bg-red-800 bg-red-500 px-1 py-1 rounded-md">
                                         Delete
                                     </a>
                                 </td>
@@ -86,7 +67,7 @@
                         {% empty %}
                             <tr>
                                 <td colspan="6">
-                                    <p>There are currently no traders</p>
+                                    <p>There are currently no trades</p>
                                 </td>
                             </tr>
                         {% endfor %}
