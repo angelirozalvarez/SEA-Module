@@ -23,10 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o$lxk!_e+d_5#&n-2)qb=md6bmp3et&q8&=ab&hccmtdw-&)8a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# This is for production
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
+#This is for development
+# DEBUG = True
+#
+# ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -84,8 +89,12 @@ WSGI_APPLICATION = 'TMSystem.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'CRUD_DB',
+        'USER': 'postgres',
+        'PASSWORD': '0stack2fullstack',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
