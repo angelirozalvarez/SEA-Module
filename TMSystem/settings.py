@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-o$lxk!_e+d_5#&n-2)qb=md6bmp3et&q8&=ab&hccmtdw-&)8a
 # This is for production
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['tmsystem-4aab3b77316c.herokuapp.com', '127.0.0.1']
 
 #This is for development
 # DEBUG = True
