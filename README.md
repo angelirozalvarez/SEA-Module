@@ -39,6 +39,9 @@ Installation
     pillow==10.2.0
     psycopg2==2.9.9
     psycopg2-binary==2.9.9
+    pytest==8.0.2
+    pytest-cov==4.1.0
+    pytest-django==4.8.0
     python-dateutil==2.9.0.post0
     pytz==2024.1
     s3transfer==0.10.0
