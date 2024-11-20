@@ -26,7 +26,7 @@ Demo
 
 Installation
 
-    To run this project, there are certain dependencies to be installed. Homebrew is used to install things. Here are the specific requirements and versions of dependencies used:
+    To run this project, there are certain dependencies to be installed. Homebrew is used to install things. Here are the specific requirements and versions of dependencies used which are also found in requirements.txt:
     asgiref==3.7.2
     boto3==1.34.56
     botocore==1.34.57
@@ -53,6 +53,25 @@ Installation
     typing_extensions==4.10.0
     urllib3==2.0.7
     whitenoise==6.6.0
+
+
+
+    Please run the following:
+    pip install virtualenv
+    virtualenv venv
+    venv\Scripts\activate
+    pip install Django
+    pip install -r requirements.txt
+    pip install psycopg2
+    python manage.py runserver
+
+    You may need to comment out the following on your local in settings.py in the TMSystem directory:
+    
+    import dj_database_url
+    db_from_env = dj_database_url.config(conn_max_age=600)
+    DATABASES['default'].update(db_from_env)
+
+    Hope it works.
 
 Deployment
     
