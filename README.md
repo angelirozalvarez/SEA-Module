@@ -1,5 +1,8 @@
-# Software Engineering & Agile
+# Originally for Software Engineering & Agile
 Level 5 Software Engineering &amp; Agile (QAC020N227S)
+
+# Repurposed for Software Engineering & DevOps
+Level 6 Software Engineering & DevOps (QAC020X328)
 
     By Angeli Roz Bautista Alvarez
 
