@@ -9,5 +9,6 @@ description = "Trade Management"
 authors = [{ name = "Angeli", email = "alvarezangelirozba@outlook.com" }]
 readme = "README.md"
 
-# Specify where your packages are
-packages = ['banks', 'static', 'trades', 'traders', 'TMSystem', 'templates']
+
+[tool.setuptools]
+packages = ["find:"]
