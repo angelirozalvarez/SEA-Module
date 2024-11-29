@@ -10,5 +10,6 @@ authors = [{ name = "Angeli", email = "alvarezangelirozba@outlook.com" }]
 readme = "README.md"
 
 
-[tool.setuptools]
-packages = ["find:"]
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["static", "templates"]
