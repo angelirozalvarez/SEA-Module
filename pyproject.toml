@@ -1,2 +1,14 @@
-[tool.setuptools]
-py-modules = ['banks', 'static', 'trades', 'traders', 'TMSystem', 'templates']
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "TM System"
+version = "0.1.0"
+description = "Trade Management"
+authors = [{ name = "Angeli", email = "" }]
+license = "MIT"
+readme = "README.md"
+
+# Specify where your packages are
+packages = ['banks', 'static', 'trades', 'traders', 'TMSystem', 'templates']
