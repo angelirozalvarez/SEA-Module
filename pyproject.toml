@@ -3,7 +3,7 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "TM System"
+name = "tm_system"
 version = "0.1.0"
 description = "Trade Management"
 authors = [{ name = "Angeli", email = "" }]
