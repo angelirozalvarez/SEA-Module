@@ -1,2 +1,2 @@
 [tool.setuptools]
-py-modules = []
+py-modules = ['banks', 'static', 'trades', 'traders', 'TMSystem', 'templates']
