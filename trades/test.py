@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from decimal import Decimal
 from datetime import datetime
-from .models import Trade, Trader, Bank
+from trades.models import Trade, Trader, Bank
 from django.test import TestCase
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import get_user_model
