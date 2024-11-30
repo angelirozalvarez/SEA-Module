@@ -37,5 +37,8 @@ jobs:
           pip install psycopg2-binary   
           python -m pip install pytest .
 
+      - name: Set DJANGO_SETTINGS_MODULE
+        run: echo "DJANGO_SETTINGS_MODULE=SEA-Module.settings" >> $GITHUB_ENV
+
       - name: Run tests
         run: pytest
