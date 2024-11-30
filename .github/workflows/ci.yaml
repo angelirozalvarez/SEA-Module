@@ -38,7 +38,7 @@ jobs:
           python -m pip install pytest .
 
       - name: Set DJANGO_SETTINGS_MODULE
-        run: echo "DJANGO_SETTINGS_MODULE=SEA-Module.settings" >> $GITHUB_ENV
+        run: echo "DJANGO_SETTINGS_MODULE=TMSystem.settings" >> $GITHUB_ENV
 
       - name: Run tests
         run: pytest
