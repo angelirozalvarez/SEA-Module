@@ -1,3 +1,9 @@
+import os
+from django.conf import settings
+os.environ['DJANGO_SETTINGS_MODULE'] = 'SEA_Module.settings'
+
+
+
 from django.core.exceptions import ValidationError
 from decimal import Decimal
 from datetime import datetime
