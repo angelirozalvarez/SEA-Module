@@ -67,12 +67,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'TMSystem.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',  # Use SQLite
-#         'NAME': BASE_DIR / 'db.sqlite3',  # Path to your SQLite database file
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',  # Use SQLite
+        'NAME': BASE_DIR / 'db.sqlite3',  # Path to your SQLite database file
+    }
+}
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
