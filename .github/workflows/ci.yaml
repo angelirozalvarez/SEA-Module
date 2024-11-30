@@ -25,6 +25,10 @@ jobs:
         with:
           python-version : ${{ matrix.python-version }}
 
+      - name: Install PostgreSQL (macOS)
+        run: |
+          brew install postgresql
+
       - name: Install dependencies
         run: |
           pip install django
